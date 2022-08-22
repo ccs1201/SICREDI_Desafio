@@ -26,8 +26,7 @@ DROP TABLE IF EXISTS `cooperado`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cooperado` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `ativo` tinyint(1) NOT NULL DEFAULT '1',
-  `cpf` varchar(11) DEFAULT NULL,
+  `cpf` varchar(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_8re5gjxbycfpswijjj4plu029` (`cpf`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

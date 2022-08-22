@@ -22,21 +22,20 @@ public class Cooperado {
     @Column(unique = true, length = 11)
     private String cpf;
 
-    @Column(nullable = false, columnDefinition = "boolean default true")
-    private boolean ativo;
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
-        this.formatCpf();
+        this.formatCpf(cpf);
+
     }
 
     /**
      * <p><b>Formata o cpf do cooperado removendo '.' (Pontos), '-' (traços, hifén) e 'espaços em branco' (white spaces) </b></p>
      */
-    public void formatCpf() {
-        this.cpf = cpf.replace(".", "");
-        this.cpf = cpf.replace("-", "");
-        this.cpf = cpf.trim();
+    public void formatCpf(String cpf) {
+        cpf = cpf.replace(".", "");
+        cpf = cpf.replace("-", "");
+        cpf = cpf.trim();
     }
 
     @Override
