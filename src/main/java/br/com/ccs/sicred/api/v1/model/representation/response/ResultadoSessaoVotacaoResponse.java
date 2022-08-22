@@ -4,7 +4,7 @@ import br.com.ccs.sicred.domain.entity.Pauta;
 
 import java.time.OffsetDateTime;
 
-public class ResultadoSessaoResponse {
+public class ResultadoSessaoVotacaoResponse {
 
     private Long id;
 
