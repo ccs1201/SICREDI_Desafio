@@ -32,6 +32,5 @@ public class VotoRealizadoListener {
         } else {
             sessaoVotacao.acrescerVotoNao();
         }
-
     }
 }

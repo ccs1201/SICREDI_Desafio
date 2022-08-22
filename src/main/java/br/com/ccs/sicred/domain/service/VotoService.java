@@ -60,11 +60,16 @@ public class VotoService {
 
     private void save(Voto voto, Long pautaId) {
 
-        this.verificaSeEleitorPodeVotar(voto.getCooperado().getCpf());
-
         voto.setSessaoVotacao(this.getSessaoVotacaoPeloIdPauta(pautaId));
 
+        //Verifica se sessão esta aberta para votos
+        if (voto.getSessaoVotacao().getAbertaParaVoto() == false) {
+            throw new BusinessLogicException("Sessão esta fechada e não pode receber votos.");
+        }
+
         this.verificaSeEleitorJaVotouNaSessao(voto);
+
+        this.verificaSeEleitorPodeVotar(voto.getCooperado().getCpf());
 
         repository.save(voto);
     }

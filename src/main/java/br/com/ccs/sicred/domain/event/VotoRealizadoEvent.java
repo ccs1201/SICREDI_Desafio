@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * <p><b>Carrega um objeto {@link Voto} sempre que um voto for registrado.</b></p>
+ * <p><b>Representa um evento {@link Voto} sempre que um voto for registrado.</b></p>
  */
 @Getter
 @AllArgsConstructor

@@ -46,7 +46,7 @@ public class CooperadoController {
         return mapper.toResponseModel(cooperadoSalvo);
     }
 
-    @GetMapping("/cpf/{cpf}")
+    @GetMapping("/{cpf}")
     @ResponseStatus(HttpStatus.OK)
     @Operation(description = "Busca um Cooperado pelo CPF. Use somente números sem pontos ('.') ou traços ('-')")
     @Parameter(name = "cpf", description = "Número do CPF para realizar a consulta. Somente números.")

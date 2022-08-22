@@ -78,6 +78,19 @@
         </dependency>
         <!-- ModelMapper -->
 
+        <!-- FlyWaydb -->
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>9.1.6</version>
+        </dependency>
+        <!-- Escpecifico para o MySQL -->
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-mysql</artifactId>
+        </dependency>
+        <!-- FlyWaydb -->
+
     </dependencies>
 
     <build>

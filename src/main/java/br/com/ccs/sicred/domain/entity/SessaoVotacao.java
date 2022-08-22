@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * <p><b>Classe que representa a votação em uma Pauta</b></p>
+ * <p><b>Classe que representa a Sessão de Votação em uma Pauta</b></p>
  *
  * @author Cleber Souza
  */
@@ -66,6 +66,11 @@ public class SessaoVotacao {
     }
 
     /**
+     * <p><b>Executa os processos de fechamento e encerramento da
+     * {@link SessaoVotacao} e {@link Pauta} e disparando um evento
+     * para que o novo estado seja persisitido.</b></p>
+     * <p>
+     * <p>
      * Fecha a votação setando encerrada como TRUE,
      * aberta para voto como FALSE, e seta o atributo aberta
      * da pauta como FALSE e encerrada como TRUE<br>
