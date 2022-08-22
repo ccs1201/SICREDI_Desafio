@@ -40,10 +40,10 @@ public class SessaoVotacaoController {
     @Operation(description = "Exibe o resultado da votação na pauta.")
     @Parameter(name = "pautaId", description = "O número da pauta que sera procurada.")
     @ResponseStatus(HttpStatus.OK)
-    public ResultadoSessaoVotacaoResponse getResultadoPauta(@PathVariable Long pautaId) {
+    public SessaoVotacaoResponse getResultadoPauta(@PathVariable Long pautaId) {
 
-        var sessao  = service.getByPautaIdEager(pautaId);
-        var response = resultadoMapper.toResponseModel(sessao);
+        var sessao = service.getByPautaIdEager(pautaId);
+        var response = mapper.toResponseModel(sessao);
 
         return response;
 
