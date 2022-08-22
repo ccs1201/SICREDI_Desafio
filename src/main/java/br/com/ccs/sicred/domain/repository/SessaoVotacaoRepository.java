@@ -27,7 +27,7 @@ public interface SessaoVotacaoRepository extends JpaRepository<SessaoVotacao, Lo
             countQuery = "select id from SessaoVotacao")
     Page<SessaoVotacao> findEncerradas(Pageable pageable, OffsetDateTime now);
 
-    @Query("select s from SessaoVotacao s join fetch s.pauta p where p.id = :id")
+    @Query("select s from SessaoVotacao s join fetch s.pauta p where s.pauta.id = :id")
     Optional<SessaoVotacao> findByPautaIdEager(Long id);
 
     Optional<Object> findByPauta(Pauta pauta);

@@ -68,4 +68,5 @@ public class PautaController {
     public Pauta update(@PathVariable @Positive Long pautaId, @RequestBody @Valid Pauta pauta) {
         return service.update(pautaId, pauta);
     }
+
 }

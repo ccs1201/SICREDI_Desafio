@@ -42,8 +42,9 @@ public class Voto extends AbstractAggregateRoot<Voto> {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private SessaoVotacao sessaoVotacao;
 
-    @Column(nullable = false, length = 11)
-    private String CpfEleitor;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    private Cooperado cooperado;
 
     @Setter(AccessLevel.NONE)
     @Column(updatable = false)

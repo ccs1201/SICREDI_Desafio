@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import javax.persistence.EntityNotFoundException;
-
 @ControllerAdvice
 public class ApiExceptionHandlerImpl extends ResponseEntityExceptionHandler implements ApiExceptionHandlerInterface {
 
@@ -25,6 +23,12 @@ public class ApiExceptionHandlerImpl extends ResponseEntityExceptionHandler impl
     @ApiResponse(responseCode = "404", description = "Nenhum Registro encontrado para o parâmetro informado.")
     public ResponseEntity<?> repositoryEntityNotFoundExceptionHandler(RepositoryEntityNotFoundException e) {
         return buildResponseEntity(HttpStatus.NOT_FOUND, e);
+    }
+ @ExceptionHandler(UnableToVoteException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ApiResponse(responseCode = "401", description = "Cooperado sem permissão para votar.")
+    public ResponseEntity<?> unableToVoteExceptionHandler(UnableToVoteException e) {
+        return buildResponseEntity(HttpStatus.UNAUTHORIZED, e);
     }
 
     @ExceptionHandler(BusinessLogicException.class)

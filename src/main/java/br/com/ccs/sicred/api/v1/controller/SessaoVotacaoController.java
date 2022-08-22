@@ -1,10 +1,13 @@
 package br.com.ccs.sicred.api.v1.controller;
 
 import br.com.ccs.sicred.api.v1.model.representation.input.SessaoVotacaoInput;
+import br.com.ccs.sicred.api.v1.model.representation.response.ResultadoSessaoResponse;
 import br.com.ccs.sicred.api.v1.model.representation.response.SessaoVotacaoResponse;
+import br.com.ccs.sicred.core.utils.mapper.ResultadoSessaoResponseMapper;
 import br.com.ccs.sicred.core.utils.mapper.SessaoVotacaoMapper;
 import br.com.ccs.sicred.domain.service.SessaoVotacaoService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +25,7 @@ public class SessaoVotacaoController {
 
     private SessaoVotacaoService service;
     private SessaoVotacaoMapper mapper;
+    ResultadoSessaoResponseMapper resultadoMapper;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
@@ -30,6 +34,15 @@ public class SessaoVotacaoController {
 
         return mapper.toPage(service.getAll(pageable));
 
+    }
+
+    @GetMapping("/{pautaId}/resultado")
+    @Operation(description = "Exibe o resultado da votação na pauta.")
+    @Parameter(name = "pautaId", description = "O número da pauta que sera procurada.")
+    @ResponseStatus(HttpStatus.OK)
+    public ResultadoSessaoResponse getResultadoPauta(@PathVariable Long pautaId) {
+        var response =  resultadoMapper.toResponseModel(service.getByPautaIdEager(pautaId));
+        return response;
     }
 
     @GetMapping("/abertas")

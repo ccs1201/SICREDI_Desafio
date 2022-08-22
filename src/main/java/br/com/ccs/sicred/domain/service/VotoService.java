@@ -11,16 +11,22 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class VotoService {
 
-    public VotoService(VotoRepository repository, EleitorService eleitorService, SessaoVotacaoService sessaoVotacaoService) {
+    public VotoService(VotoRepository repository,
+                       EleitorService eleitorService,
+                       SessaoVotacaoService sessaoVotacaoService,
+                       CooperadoService cooperadoService) {
+
         this.repository = repository;
         this.eleitorService = eleitorService;
         this.sessaoVotacaoService = sessaoVotacaoService;
+        this.cooperadoService = cooperadoService;
     }
 
-    private VotoRepository repository;
+    private final VotoRepository repository;
     private Voto voto;
-    private EleitorService eleitorService;
-    private SessaoVotacaoService sessaoVotacaoService;
+    private final EleitorService eleitorService;
+    private final SessaoVotacaoService sessaoVotacaoService;
+    private final CooperadoService cooperadoService;
 
     /**
      * <p><b>Registra uma voto SIM na pauta com ID informado</b></p>
@@ -31,7 +37,7 @@ public class VotoService {
     public void votarSimNaPauta(Long pautaId, String cpfEleitor) {
 
         voto = new Voto();
-        voto.setCpfEleitor(cpfEleitor);
+        voto.setCooperado(cooperadoService.getByCpf(cpfEleitor));
         voto.votarSim();
         this.save(voto, pautaId);
     }
@@ -46,7 +52,7 @@ public class VotoService {
     public void votarNaoNaPauta(Long pautaId, String cpfEleitor) {
 
         voto = new Voto();
-        voto.setCpfEleitor(cpfEleitor);
+        voto.setCooperado(cooperadoService.getByCpf(cpfEleitor));
         voto.votarNao();
         this.save(voto, pautaId);
 
@@ -54,7 +60,7 @@ public class VotoService {
 
     private void save(Voto voto, Long pautaId) {
 
-        this.verificaSeEleitorPodeVotar(voto.getCpfEleitor());
+        this.verificaSeEleitorPodeVotar(voto.getCooperado().getCpf());
 
         voto.setSessaoVotacao(this.getSessaoVotacaoPeloIdPauta(pautaId));
 
@@ -82,7 +88,7 @@ public class VotoService {
      * @param cpfEleitor O CPF do Eleitor
      */
     private void verificaSeEleitorPodeVotar(String cpfEleitor) {
-        eleitorService.getEleitor(cpfEleitor);
+        eleitorService.isAbleToVote(cpfEleitor);
     }
 
     /**
@@ -96,7 +102,9 @@ public class VotoService {
         var jaVotou = voto.getSessaoVotacao()
                 .getVotos()
                 .stream()
-                .anyMatch(v -> v.getCpfEleitor().equals(voto.getCpfEleitor()));
+                .anyMatch(v ->
+                        v.getCooperado().getCpf()
+                                .equals(voto.getCooperado().getCpf()));
 
         if (jaVotou) {
             throw new BusinessLogicException("Eleitor já votou nesta Pauta.");

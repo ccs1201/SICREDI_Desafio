@@ -2,6 +2,7 @@ package br.com.ccs.sicred.domain.service;
 
 
 import br.com.ccs.sicred.domain.entity.Pauta;
+import br.com.ccs.sicred.domain.exception.service.BusinessLogicException;
 import br.com.ccs.sicred.domain.exception.service.EntityPersistException;
 import br.com.ccs.sicred.domain.exception.service.EntityUpdateException;
 import br.com.ccs.sicred.domain.exception.service.PautaNotFoundException;
@@ -26,6 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class PautaService {
 
     private final PautaRepository repository;
+
 
     /**
      * <p><b>Recupera uma única {@link Pauta} pelo seu ID.</b></p>
@@ -116,7 +118,9 @@ public class PautaService {
 
     private void checkIfIsUpdatable(Pauta pauta) {
 
-        //todo
+        if (pauta.getAberta()) {
+            throw new BusinessLogicException("Pauta já esta aberta e não pode ser editada.");
+        }
 
     }
 }

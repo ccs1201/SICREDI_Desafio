@@ -33,14 +33,14 @@ public class CooperadoController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    @Operation(description = "Retorna todos os Cooperados. Com Paginação", deprecated = true)
+    @Operation(description = "Retorna todos os Cooperados. Com Paginação")
     public Page<CooperadoResponse> getAll(@PageableDefault(size = 10) Pageable pageable) {
         return mapper.toPage(service.getAll(pageable));
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @Operation(description = "Insere um novo Cooperado", deprecated = true)
+    @Operation(description = "Insere um novo Cooperado")
     public CooperadoResponse save(@RequestBody @Valid CooperadoInput cooperado) {
         Cooperado cooperadoSalvo = service.save(mapper.toEntity(cooperado));
         return mapper.toResponseModel(cooperadoSalvo);
@@ -48,7 +48,7 @@ public class CooperadoController {
 
     @GetMapping("/cpf/{cpf}")
     @ResponseStatus(HttpStatus.OK)
-    @Operation(description = "Busca um Cooperado pelo CPF. Use somente números sem pontos ('.') ou traços ('-')", deprecated = true)
+    @Operation(description = "Busca um Cooperado pelo CPF. Use somente números sem pontos ('.') ou traços ('-')")
     @Parameter(name = "cpf", description = "Número do CPF para realizar a consulta. Somente números.")
     public CooperadoResponse getByCpf(@PathVariable String cpf) {
         return mapper.toResponseModel(service.getByCpf(cpf));
@@ -57,7 +57,7 @@ public class CooperadoController {
     @GetMapping("/external/{cpf}")
     @ResponseStatus(HttpStatus.OK)
     @Operation(description =
-            "Integra com um sistema externo (https://user-info.herokuapp.com/users/{cpf}) que verifique, a partir do CPF do associado, se ele pode votar"
+            "Integra com um sistema externo (https://user-info.herokuapp.com/users/{cpf}) que verifica, a partir do CPF do associado, se ele pode votar"
             , deprecated = true)
     @Parameter(name = "cpf", description = "O CPF a ser consultado se pode ou não votar.")
     public Eleitor getExternal(@PathVariable String cpf) {

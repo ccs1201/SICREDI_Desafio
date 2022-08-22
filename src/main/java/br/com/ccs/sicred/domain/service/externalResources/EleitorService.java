@@ -2,6 +2,7 @@ package br.com.ccs.sicred.domain.service.externalResources;
 
 import br.com.ccs.sicred.domain.entity.Eleitor;
 import br.com.ccs.sicred.domain.exception.service.BusinessLogicException;
+import br.com.ccs.sicred.domain.exception.service.UnableToVoteException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
@@ -62,7 +63,7 @@ public class EleitorService {
         if (eleitor.isAbleToVote()) {
             return true;
         } else {
-            throw new BusinessLogicException("Eleitor não autorizado a votar.");
+            throw new UnableToVoteException("Eleitor não autorizado a votar.");
         }
     }
 }

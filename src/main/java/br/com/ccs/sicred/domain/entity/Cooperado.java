@@ -6,6 +6,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Getter
@@ -28,6 +29,9 @@ public class Cooperado {
         this.formatCpf(cpf);
 
     }
+
+    @OneToMany(mappedBy = "cooperado", fetch = FetchType.LAZY)
+    private Collection<Voto> votos;
 
     /**
      * <p><b>Formata o cpf do cooperado removendo '.' (Pontos), '-' (traços, hifén) e 'espaços em branco' (white spaces) </b></p>

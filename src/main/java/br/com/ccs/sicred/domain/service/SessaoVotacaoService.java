@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.OffsetDateTime;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -72,7 +71,7 @@ public class SessaoVotacaoService {
      * Não podem haver duas sessão de votação para a mesma pauta.</p>
      *
      * @param sessaoVotacao
-     * @return
+     * @return {@link SessaoVotacao}
      */
     @Transactional
     public SessaoVotacao save(SessaoVotacao sessaoVotacao) {
@@ -128,14 +127,15 @@ public class SessaoVotacaoService {
      * @throws RepositoryEntityNotFoundException se nenhum objeto for localizado.
      */
     public SessaoVotacao getById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new RepositoryEntityNotFoundException(String.format("Sessão de votação com ID: %d, não localizada", id)));
+        return repository.findById(id).orElseThrow(() ->
+                new RepositoryEntityNotFoundException(String.format("Sessão de votação com ID: %d, não localizada", id)));
     }
 
     /**
      * <p><b>Confirma se a pauta existe e garante que o objeto pauta esteja
      * gerenciado pelo contexto de persistência (MANAGED) para evitar
      * {@link org.hibernate.PersistentObjectException} ao passar um objeto
-     * relacionado fora do contexto da {@code JPA}</b></p>
+     * relacionado fora do contexto da {@code JPA} ({@code DETACHED})</b></p>
      *
      * @param pautaId o id da Pauta.
      */
@@ -161,26 +161,32 @@ public class SessaoVotacaoService {
 
             //Se a sessão ja tiver uma data de abertura
             //então não pode ser alterada
-        } else if (sessaoVotacao.getDataAbertura().isBefore(OffsetDateTime.now())) {
+        } else if (sessaoVotacao.getAbertaParaVoto()) {
             throw new BusinessLogicException("Sessão já esta aberta.");
         }
 
         sessaoVotacao.abrir();
         try {
-            repository.save(sessaoVotacao);
+
+            //SaveAndFlush realiza o commit imediatamente
+            //sem aguardar pela decisão do ContextManager
+            //que pode realizar o commit mais "tarde".
+            repository.saveAndFlush(sessaoVotacao);
         } catch (IllegalArgumentException e) {
             throw new EntityPersistException("Sessão Votação.");
         }
     }
 
+    /**
+     * <p><b>Busca uma sessão pelo ID da pauta.</b></p>
+     *
+     * @param pautaId o id da pauta
+     * @return SessaoVotacao
+     */
     public SessaoVotacao getByPautaIdEager(Long pautaId) {
 
-        Optional<SessaoVotacao> sessao = repository.findByPautaIdEager(pautaId);
-
-        if (sessao.isEmpty()) {
-            throw new RepositoryEntityNotFoundException("Não existe sessão para a pauta informada.");
-        }
-
-        return sessao.get();
+        return repository.findByPautaIdEager(pautaId)
+                .orElseThrow(() ->
+                        new RepositoryEntityNotFoundException("Não existe sessão para a pauta informada."));
     }
 }

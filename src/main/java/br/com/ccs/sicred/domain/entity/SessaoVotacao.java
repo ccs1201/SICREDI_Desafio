@@ -33,9 +33,9 @@ public class SessaoVotacao {
     @Valid
     private Pauta pauta;
     @PositiveOrZero
-    private Long totalVotosSim = Long.valueOf(0L);
+    private Long totalVotosSim = 0L;
     @PositiveOrZero
-    private Long totalVotosNao = Long.valueOf(0L);
+    private Long totalVotosNao = 0L;
 
     private Boolean Aprovada = null;
 
@@ -64,23 +64,23 @@ public class SessaoVotacao {
         this.abertaParaVoto = true;
         this.dataAbertura = OffsetDateTime.now();
         this.dataEncerramento = dataAbertura.plusMinutes(duracaoEmMinutosAposAbertura);
+        this.getPauta().setAberta(true);
     }
 
     /**
      * Fecha a votação setando ecerrada como true
      * aberto para voto como false e <br>
-     * aprovada:<br>
-     * true - se totalVotosSim > totalVotosNao senão false.
+     * <p>Uma somente será considerada aprovada se
+     * obtiver a maioria dos votos SIM, metade + 1</p>
+     * <br>
+     * Aprovada:<br>
+     * <p><b>TRUE</b> - se totalVotosSim > totalVotosNao senão <b>FALSE</b>.</p>
      */
     private void fechar() {
         this.abertaParaVoto = false;
         this.encerrada = true;
 
-        if (this.totalVotosSim > totalVotosNao) {
-            this.Aprovada = true;
-        } else {
-            this.Aprovada = false;
-        }
+        this.Aprovada = this.totalVotosSim > totalVotosNao;
     }
 
     /**
@@ -111,10 +111,6 @@ public class SessaoVotacao {
                 this.fechar();
             }
         }
-
-//        if (this.dataEncerramento != null) {
-//            this.setAbertaParaVoto(dataEncerramento.isBefore(OffsetDateTime.now()));
-//        }
     }
 
     @Override

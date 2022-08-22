@@ -38,6 +38,9 @@ public class Pauta {
     @Column(nullable = false)
     private String descricaoPauta;
 
+    @Column(nullable = false, columnDefinition = "boolean default false")
+    private Boolean aberta = false;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -1,6 +1,5 @@
 package br.com.ccs.sicred.api.v1.model.representation.input;
 
-import br.com.ccs.sicred.api.v1.model.representation.PautaIdInput;
 import lombok.Getter;
 import lombok.Setter;
 
