@@ -15,8 +15,6 @@ import java.util.Objects;
  * <p><b>Classe que representa a votação em uma Pauta</b></p>
  *
  * @author Cleber Souza
- * @version 1.0
- * @since 20/08/2022
  */
 @Getter
 @Setter
@@ -68,9 +66,10 @@ public class SessaoVotacao {
     }
 
     /**
-     * Fecha a votação setando ecerrada como true
-     * aberto para voto como false e <br>
-     * <p>Uma somente será considerada aprovada se
+     * Fecha a votação setando encerrada como TRUE,
+     * aberta para voto como FALSE, e seta o atributo aberta
+     * da pauta como FALSE e encerrada como TRUE<br>
+     * <p>Uma votação somente será considerada aprovada se
      * obtiver a maioria dos votos SIM, metade + 1</p>
      * <br>
      * Aprovada:<br>
@@ -79,6 +78,8 @@ public class SessaoVotacao {
     private void fechar() {
         this.abertaParaVoto = false;
         this.encerrada = true;
+        this.getPauta().setAberta(false);
+        this.getPauta().setEncerrada(true);
 
         this.Aprovada = this.totalVotosSim > totalVotosNao;
     }
