@@ -1,4 +1,4 @@
-package br.com.ccs.sicred.api.v1.model.model.response;
+package br.com.ccs.sicred.api.v1.model.representation.response;
 
 import br.com.ccs.sicred.domain.entity.Pauta;
 import com.fasterxml.jackson.annotation.JsonInclude;

@@ -1,7 +1,7 @@
 package br.com.ccs.sicred.api.v1.controller;
 
-import br.com.ccs.sicred.api.v1.model.model.input.CooperadoInput;
-import br.com.ccs.sicred.api.v1.model.model.response.CooperadoResponse;
+import br.com.ccs.sicred.api.v1.model.representation.input.CooperadoInput;
+import br.com.ccs.sicred.api.v1.model.representation.response.CooperadoResponse;
 import br.com.ccs.sicred.core.utils.mapper.CooperadoMapper;
 import br.com.ccs.sicred.domain.entity.Cooperado;
 import br.com.ccs.sicred.domain.entity.Eleitor;

@@ -1,7 +1,7 @@
 package br.com.ccs.sicred.api.v1.controller;
 
-import br.com.ccs.sicred.api.v1.model.model.input.SessaoVotacaoInput;
-import br.com.ccs.sicred.api.v1.model.model.response.SessaoVotacaoResponse;
+import br.com.ccs.sicred.api.v1.model.representation.input.SessaoVotacaoInput;
+import br.com.ccs.sicred.api.v1.model.representation.response.SessaoVotacaoResponse;
 import br.com.ccs.sicred.core.utils.mapper.SessaoVotacaoMapper;
 import br.com.ccs.sicred.domain.service.SessaoVotacaoService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -57,7 +57,7 @@ public class SessaoVotacaoController {
     @PatchMapping("/{sessaoId}/abre")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(description = "Abre uma sessão para votação")
-    public void abrirSessaoParaVotação(@PathVariable @Positive Long sessaoId) {
+    public void abrirSessaoParaVotacao(@PathVariable @Positive Long sessaoId) {
         service.abrirSessaoParaVotacao(sessaoId);
     }
 }

@@ -1,4 +1,4 @@
-package br.com.ccs.sicred.api.v1.model.model.input;
+package br.com.ccs.sicred.api.v1.model.representation.input;
 
 import lombok.Getter;
 import lombok.Setter;

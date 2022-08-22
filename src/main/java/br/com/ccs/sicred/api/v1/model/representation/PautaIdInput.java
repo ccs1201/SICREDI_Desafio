@@ -1,4 +1,4 @@
-package br.com.ccs.sicred.api.v1.model.model;
+package br.com.ccs.sicred.api.v1.model.representation;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
 import lombok.Getter;
