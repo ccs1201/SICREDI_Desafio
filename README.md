@@ -21,10 +21,10 @@ Tenha uma instância do SGDB *MySQL* ativa para conexão.
 de dados com nome *sicred* automaticamente no startup, se isto for um problema altere a propriedade *spring.datasource.url*
 removendo o parâmetro *createDatabaseIfNotExist=true* no arquivo *src/main/resources/configuration.properties*.
 
-Da mesma forma para alterar a *URL* de conexão com o banco de dados altera a configuração do parâmetro 
-*spring.datasource.url* com dados necessários para conexão a sua data base.
+Da mesma forma para modificar a *URL* de conexão com o banco de dados altere a configuração do parâmetro 
+*spring.datasource.url* com os dados necessários para conexão a sua data base.
 
-Ao inicializar a aplicação o *FlyWay* irá checar, criar ou atualizar a base de dados conforme necessário.
+Ao inicializar a aplicação o *FlyWay* irá checar, criar ou atualizar o schema conforme necessário.
 
 ##### PS. Um cooperado só poderá votar se estiver cadastrado, por isso insira alguns *CPFs* fake para poder testar o endpoint de votação. Ou Simplesmente remova o "-" (underscore) do arquivo afterMigrate.sql que se encontra em: *src/main/resources/db/migration/testdata*.
 
