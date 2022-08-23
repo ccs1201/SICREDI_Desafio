@@ -7,6 +7,7 @@ import br.com.ccs.sicred.domain.exception.service.EntityPersistException;
 import br.com.ccs.sicred.domain.exception.service.EntityUpdateException;
 import br.com.ccs.sicred.domain.exception.service.PautaNotFoundException;
 import br.com.ccs.sicred.domain.repository.PautaRepository;
+import br.com.ccs.sicred.domain.repository.SessaoVotacaoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
@@ -27,6 +28,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class PautaService {
 
     private final PautaRepository repository;
+    private final SessaoVotacaoRepository sessaoVotacaoRepository;
 
 
     /**
@@ -94,18 +96,27 @@ public class PautaService {
     /**
      * <p><b>Atualiza uma {@link Pauta} existente. </b></p>
      *
-     * @param id    ID da Pauta que sera atualizada.
-     * @param pauta Pauta que a ser atualizada.
+     * @param pautaId ID da Pauta que sera atualizada.
+     * @param pauta   Pauta que a ser atualizada.
      * @return {@link Pauta} A pauta atualizada.
      * @throws PautaNotFoundException Caso não seja encontrada uma pauta com o ID informado.
      * @throws EntityPersistException caso ocorra algum erro ao salvar.
      */
     @Transactional
-    public Pauta update(Long id, Pauta pauta) {
+    public Pauta update(Long pautaId, Pauta pauta) {
 
-        Pauta pautaToUpdate = this.getById(id);
+        var sessao = sessaoVotacaoRepository.findByPautaIdEager(pautaId);
 
-        checkIfIsUpdatable(pautaToUpdate);
+        // verifca se já existe uma sessão para pauta,
+        // pois caso exista se estiver aberta, contiver uma
+        // data de abertura, então não podemos permitir i update
+        if (sessao.isPresent()) {
+            if (sessao.get().getDataAbertura() != null) {
+                throw new BusinessLogicException("Pauta já foi aberta e não pode ser alterada.");
+            }
+        }
+
+        Pauta pautaToUpdate = this.getById(pautaId);
 
         BeanUtils.copyProperties(pauta, pautaToUpdate, "id");
 
@@ -114,13 +125,5 @@ public class PautaService {
         } catch (IllegalArgumentException e) {
             throw new EntityUpdateException("Pauta", e);
         }
-    }
-
-    private void checkIfIsUpdatable(Pauta pauta) {
-
-        if (pauta.getAberta()) {
-            throw new BusinessLogicException("Pauta já esta aberta e não pode ser editada.");
-        }
-
     }
 }

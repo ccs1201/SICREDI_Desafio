@@ -8,6 +8,8 @@ import br.com.ccs.sicred.domain.service.externalResources.EleitorService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.OffsetDateTime;
+
 @Service
 public class VotoService {
 
@@ -62,9 +64,15 @@ public class VotoService {
 
         voto.setSessaoVotacao(this.getSessaoVotacaoPeloIdPauta(pautaId));
 
-        //Verifica se sessão esta aberta para votos
-        if (voto.getSessaoVotacao().getAbertaParaVoto() == false) {
-            throw new BusinessLogicException("Sessão esta fechada e não pode receber votos.");
+        OffsetDateTime abertura = voto.getSessaoVotacao().getDataAbertura();
+        OffsetDateTime encerramento = voto.getSessaoVotacao().getDataEncerramento();
+
+        //Verifica se a sessão esta aberta para votos
+        if (abertura != null && abertura.isBefore(OffsetDateTime.now())) {
+            if (encerramento.isAfter(OffsetDateTime.now())) {
+                throw new BusinessLogicException("Sessão esta fechada e não pode receber votos.");
+            }
+
         }
 
         this.verificaSeEleitorJaVotouNaSessao(voto);

@@ -84,9 +84,6 @@ public class SessaoVotacaoService {
             //checa se ja existe uma sessão de votação para a pauta informada
             this.verificaSeJaExisteSessaoParaPauta(sessaoVotacao.getPauta());
 
-            //Seta sessão como fechada para votação
-            sessaoVotacao.setAbertaParaVoto(false);
-
             //Garante que uma sessão nova não tenha aprovação ou recusa.
             sessaoVotacao.setAprovada(null);
 
@@ -156,18 +153,18 @@ public class SessaoVotacaoService {
         SessaoVotacao sessaoVotacao = this.getById(sessaoId);
 
         //Se a sessão já estiver encerrada não pose ser reaberta
-        if (sessaoVotacao.getEncerrada()) {
+        OffsetDateTime dataEncerramento = sessaoVotacao.getDataEncerramento();
+        if (dataEncerramento != null && dataEncerramento.isBefore(OffsetDateTime.now())) {
             throw new BusinessLogicException("Sessão já foi encerrada e não pode ser alterada.");
 
             //Se a sessão ja tiver uma data de abertura
             //então não pode ser alterada
-        } else if (sessaoVotacao.getAbertaParaVoto()) {
+        } else if (sessaoVotacao.getDataAbertura() != null) {
             throw new BusinessLogicException("Sessão já esta aberta.");
         }
 
         sessaoVotacao.abrir();
         try {
-
             //SaveAndFlush realiza o commit imediatamente
             //sem aguardar pela decisão do ContextManager
             //que pode realizar o commit mais "tarde".
