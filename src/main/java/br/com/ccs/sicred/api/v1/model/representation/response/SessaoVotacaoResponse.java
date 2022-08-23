@@ -13,9 +13,11 @@ import java.time.OffsetDateTime;
 public class SessaoVotacaoResponse {
 
     private Long id;
-    private boolean abertaParaVoto;
+    private Boolean Aprovada;
     private OffsetDateTime dataAbertura;
     private OffsetDateTime dataEncerramento;
     private long duracaoEmMinutosAposAbertura;
+    private Long totalVotosSim = 0L;
+    private Long totalVotosNao = 0L;
     private Pauta pauta;
 }

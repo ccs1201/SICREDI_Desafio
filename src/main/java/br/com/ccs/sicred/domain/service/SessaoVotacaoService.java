@@ -186,4 +186,21 @@ public class SessaoVotacaoService {
                 .orElseThrow(() ->
                         new RepositoryEntityNotFoundException("Não existe sessão para a pauta informada."));
     }
+
+    /**
+     * <p><b>Busca o resultado de uma sessão, somente será
+     * retornará dados casa a sessão esteja aberta ou encerrada. </b></p>
+     *
+     * @param pautaId o ID da pauta em votação.
+     * @throws BusinessLogicException Caso a sessão ainda não esteja aberta.
+     */
+    public SessaoVotacao getResultado(Long pautaId) {
+        var sessao = this.getByPautaIdEager(pautaId);
+
+        if (sessao.getDataAbertura() == null) {
+            throw new BusinessLogicException("Sessão ainda não foi aberta para votação.");
+        }
+
+        return sessao;
+    }
 }

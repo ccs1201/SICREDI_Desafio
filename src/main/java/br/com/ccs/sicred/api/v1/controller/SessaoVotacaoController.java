@@ -1,7 +1,6 @@
 package br.com.ccs.sicred.api.v1.controller;
 
 import br.com.ccs.sicred.api.v1.model.representation.input.SessaoVotacaoInput;
-import br.com.ccs.sicred.api.v1.model.representation.response.ResultadoSessaoVotacaoResponse;
 import br.com.ccs.sicred.api.v1.model.representation.response.SessaoVotacaoResponse;
 import br.com.ccs.sicred.core.utils.mapper.ResultadoSessaoResponseMapper;
 import br.com.ccs.sicred.core.utils.mapper.SessaoVotacaoMapper;
@@ -42,10 +41,7 @@ public class SessaoVotacaoController {
     @ResponseStatus(HttpStatus.OK)
     public SessaoVotacaoResponse getResultadoPauta(@PathVariable Long pautaId) {
 
-        var sessao = service.getByPautaIdEager(pautaId);
-        var response = mapper.toResponseModel(sessao);
-
-        return response;
+        return mapper.toResponseModel(service.getResultado(pautaId));
 
     }
 

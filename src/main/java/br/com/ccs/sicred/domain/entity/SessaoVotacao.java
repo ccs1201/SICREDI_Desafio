@@ -34,10 +34,8 @@ public class SessaoVotacao {
     private Long totalVotosSim = 0L;
     @PositiveOrZero
     private Long totalVotosNao = 0L;
-
     @Transient
     private Boolean Aprovada = null;
-
     private OffsetDateTime dataAbertura;
     private OffsetDateTime dataEncerramento;
 
@@ -101,7 +99,6 @@ public class SessaoVotacao {
         if (dataEncerramento != null && dataEncerramento.isBefore(OffsetDateTime.now())) {
             this.fechar();
         }
-
     }
 
     @Override
