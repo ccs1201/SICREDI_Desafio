@@ -1,4 +1,4 @@
-use sicred;
+use sicredi;
 
 create table if not exists cooperado
 (
