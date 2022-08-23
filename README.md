@@ -26,6 +26,8 @@ Da mesma forma para modificar a *URL* de conexão com o banco de dados altere a 
 
 Ao inicializar a aplicação o *FlyWay* irá checar, criar ou atualizar o schema conforme necessário.
 
+O tomcat embbeded esta configurado para rodar na porta 8080 a documanetação da api está em HOST:8080/docs.html
+
 ##### PS. Um cooperado só poderá votar se estiver cadastrado, por isso insira alguns *CPFs* fake para poder testar o endpoint de votação. Ou Simplesmente remova o "-" (underscore) do arquivo *afterMigrate.sql* que encontra-se em: *src/main/resources/db/migration/testdata*.
 
 ### That's it, have any question? Ficou com dúvidas follow me/siga-me linkedin ->  <a href="https://www.linkedin.com/in/ccs1201/">Cleber Souza<a/>
