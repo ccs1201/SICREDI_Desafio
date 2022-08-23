@@ -18,7 +18,7 @@ Baixe o código fonte na IDE de sua preferência e importe o projeto pelo arquiv
 Tenha uma instância do SGDB *MySQL* ativa para conexão. 
 
 *ATENÇÃO:* O fonte está configurado para criar uma base
-de dados com nome *sicred* automaticamente no startup, se isto for um problema altere a propriedade *spring.datasource.url*
+de dados com nome *sicredi* automaticamente no startup, se isto for um problema altere a propriedade *spring.datasource.url*
 removendo o parâmetro *createDatabaseIfNotExist=true* no arquivo *src/main/resources/configuration.properties*.
 
 Da mesma forma para modificar a *URL* de conexão com o banco de dados altere a configuração do parâmetro 
@@ -26,9 +26,9 @@ Da mesma forma para modificar a *URL* de conexão com o banco de dados altere a 
 
 Ao inicializar a aplicação o *FlyWay* irá checar, criar ou atualizar o schema conforme necessário.
 
-O tomcat embbeded esta configurado para rodar na porta *8080* a documanetação da api está em *HOST:8080/docs.html*
+O tomcat embbeded esta configurado para rodar na porta *8080* a documanetação da api está em *http://host:8080/docs.html*
 
-##### PS. Um cooperado só poderá votar se estiver cadastrado, por isso insira alguns *CPFs* fake para poder testar o endpoint de votação. Ou Simplesmente remova o "-" (underscore) do arquivo *afterMigrate.sql* que encontra-se em: *src/main/resources/db/migration/testdata*.
+##### PS. Um cooperado só poderá votar se estiver cadastrado, por isso insira alguns *CPFs* fake para poder testar o endpoint de votação. Ou Simplesmente remova o "-" (underscore) do arquivo *afterMigrate.sql* que encontra-se em: *src/main/resources/db/migration/testdata* não esquece de comental-lo movamente após o primeiro startup, pois o FlyWay carrega este arquivo todo vez que a aplicação foir iniciada, como a coluna CPF tem uma restrição uma nova tentativa de inserção pleo FlyWay causá uma exception impedindo a aplicação de startar.
 
 ### That's it, have any question? Ficou com dúvidas follow me/siga-me linkedin ->  <a href="https://www.linkedin.com/in/ccs1201/">Cleber Souza<a/>
 
