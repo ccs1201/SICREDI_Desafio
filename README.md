@@ -13,9 +13,11 @@
 * MAVEN
 
 # Como "Buildar" este projeto
-Baixe o códiigo fonte na IDE de sua preferência e importe o projeto pelo arquivo *pom.xml* disponível na raiz do projeto.
+Baixe o código fonte na IDE de sua preferência e importe o projeto pelo arquivo *pom.xml* disponível na raiz do projeto.
 
-Tenha uma instância do SGDB *MySQL* ativa para conexão. *ATENÇÃO:* O fonte está configurado para criar uma base
+Tenha uma instância do SGDB *MySQL* ativa para conexão. 
+
+*ATENÇÃO:* O fonte está configurado para criar uma base
 de dados com nome *sicred* automaticamente no startup, se isto for um problema altere a propriedade *spring.datasource.url*
 removendo o parâmetro *createDatabaseIfNotExist=true* no arquivo *src/main/resources/configuration.properties*.
 
