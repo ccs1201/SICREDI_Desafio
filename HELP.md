@@ -30,7 +30,7 @@ O tomcat embbeded esta configurado para rodar na porta *8080* a documanetação 
 
 ##### PS. Um cooperado só poderá votar se estiver cadastrado, por isso insira alguns *CPFs* fake para poder testar o endpoint de votação. Ou Simplesmente remova o "-" (underscore) do arquivo *afterMigrate.sql* que encontra-se em: *src/main/resources/db/migration/testdata* não esquece de comental-lô novamente após o primeiro startup, pois o FlyWay carrega este arquivo todo vez que a aplicação for iniciada, como a coluna CPF tem uma restrição *UNIQUE* uma nova tentativa de inserção pelo FlyWay causá uma exception impedindo a aplicação de startar.
 
-### That's it, have any question? Ficou com dúvidas follow me/siga-me linkedin ->  <a href="https://www.linkedin.com/in/ccs1201/">Cleber Souza<a/>
+### That's it, have any question? Ficou com dúvidas follow me / siga-me linkedin ->  <a href="https://www.linkedin.com/in/ccs1201/">Cleber Souza<a/>
 
 
 # Enjoy ;)
