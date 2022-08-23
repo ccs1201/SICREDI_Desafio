@@ -26,7 +26,7 @@ Ao inicializar a aplicação o *FlyWay* irá checar, criar ou atualizar a base d
 
 ##### PS. Um cooperado só poderá votar se estiver cadastrado, por isso insira alguns *CPFs* fake para poder testar o endpoint de votação. Ou Simplesmente remova o "-" (underscore) do arquivo afterMigrate.sql que se encontra em: *src/main/resources/db/migration/testdata*.
 
-### That's it, have any question? Ficou com dúvidas follow me/me siga linkedin ->  <a href="https://www.linkedin.com/in/ccs1201/">Cleber Souza<a/>
+### That's it, have any question? Ficou com dúvidas follow me/siga-me linkedin ->  <a href="https://www.linkedin.com/in/ccs1201/">Cleber Souza<a/>
 
 
 # Enjoy ;)
