@@ -1,4 +1,4 @@
-# Desafio técnico Sicred
+# Desafio técnico Sicredi
 
 #### CSouza 23/08/2022
 
