@@ -37,9 +37,10 @@ public class Cooperado {
      * <p><b>Formata o cpf do cooperado removendo '.' (Pontos), '-' (traços, hifén) e 'espaços em branco' (white spaces) </b></p>
      */
     public void formatCpf(String cpf) {
+        cpf = cpf.trim();
         cpf = cpf.replace(".", "");
         cpf = cpf.replace("-", "");
-        cpf = cpf.trim();
+
     }
 
     @Override

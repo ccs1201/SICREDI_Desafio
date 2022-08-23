@@ -35,13 +35,9 @@ public class SessaoVotacao {
     @PositiveOrZero
     private Long totalVotosNao = 0L;
 
+    @Transient
     private Boolean Aprovada = null;
 
-    @Column(columnDefinition = "boolean not null default false")
-    private Boolean abertaParaVoto = false;
-
-    @Column(columnDefinition = "boolean not null default false")
-    private Boolean encerrada = false;
     private OffsetDateTime dataAbertura;
     private OffsetDateTime dataEncerramento;
 
@@ -53,38 +49,25 @@ public class SessaoVotacao {
 
     /**
      * <p><b>Abre a sessão para votação</b></p>
-     * <p> Seta o atributo {@code abertaParaVoto} como True</p>
+     *
      * <p> Seta o atirbuto {@code dataAbertura} para a data e hora atual {@code OffsetDateTime.now()}</p>
      * <p> Calcula o atribudo {@code dataEncerramento} {@code dataAbertura.plusMinutes(duracaoEmMinutosAposAbertura)} <br><br>
      * {@code dataEncerramento} = ({@code dataAbertura} + {@code duracaoEmMinutosAposAbertura})</p>
      */
     public void abrir() {
-        this.abertaParaVoto = true;
+
         this.dataAbertura = OffsetDateTime.now();
         this.dataEncerramento = dataAbertura.plusMinutes(duracaoEmMinutosAposAbertura);
-        this.getPauta().setAberta(true);
     }
 
     /**
      * <p><b>Executa os processos de fechamento e encerramento da
-     * {@link SessaoVotacao} e {@link Pauta} e disparando um evento
-     * para que o novo estado seja persisitido.</b></p>
-     * <p>
-     * <p>
-     * Fecha a votação setando encerrada como TRUE,
-     * aberta para voto como FALSE, e seta o atributo aberta
-     * da pauta como FALSE e encerrada como TRUE<br>
-     * <p>Uma votação somente será considerada aprovada se
-     * obtiver a maioria dos votos SIM, metade + 1</p>
+     * {@link SessaoVotacao} e {@link Pauta} </b></p>
      * <br>
      * Aprovada:<br>
      * <p><b>TRUE</b> - se totalVotosSim > totalVotosNao senão <b>FALSE</b>.</p>
      */
     private void fechar() {
-        this.abertaParaVoto = false;
-        this.encerrada = true;
-        this.getPauta().setAberta(false);
-        this.getPauta().setEncerrada(true);
 
         this.Aprovada = this.totalVotosSim > totalVotosNao;
     }
@@ -106,17 +89,19 @@ public class SessaoVotacao {
     }
 
     /**
-     * <p>Atualiza o atributo {@code abertaParaVoto} caso esteja como true, após carregar do banco de dados.
-     * Usado para setar {@code abertaParaVoto} para false, se a data de encerramento
-     * for anterior a data atual.</p>
+     * <p>Método de cCallBack para para executar a rotina de
+     * encerramento da votação casa a Data de Encerramento
+     * seja anterior a {@code OffsetDateTime.now()} </p>
+     *
+     * @see this.fechar()
      */
     @PostLoad
     private void postLoadCallBack() {
-        if (abertaParaVoto) {
-            if (dataEncerramento.isBefore(OffsetDateTime.now())) {
-                this.fechar();
-            }
+
+        if (dataEncerramento != null && dataEncerramento.isBefore(OffsetDateTime.now())) {
+            this.fechar();
         }
+
     }
 
     @Override
