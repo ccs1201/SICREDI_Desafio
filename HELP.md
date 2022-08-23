@@ -18,7 +18,7 @@ Baixe o código fonte na IDE de sua preferência e importe o projeto pelo arquiv
 Tenha uma instância do SGDB *MySQL* ativa para conexão. 
 
 *ATENÇÃO:* O fonte está configurado para criar uma base
-de dados com nome *sicred* automaticamente no startup, se isto for um problema altere a propriedade *spring.datasource.url*
+de dados com nome *sicredi* automaticamente no startup, se isto for um problema altere a propriedade *spring.datasource.url*
 removendo o parâmetro *createDatabaseIfNotExist=true* no arquivo *src/main/resources/configuration.properties*.
 
 Da mesma forma para modificar a *URL* de conexão com o banco de dados altere a configuração do parâmetro 
