@@ -111,7 +111,7 @@ public class SessaoVotacaoService {
     private void verificaSeJaExisteSessaoParaPauta(Pauta pauta) {
 
         repository.findByPauta(pauta).ifPresent((p) -> {
-            throw new BusinessLogicException("Já existe uma sessão cadastrada para a pauta informada." + " Não podem existir duas sessões para a mesma pauta.");
+            throw new BusinessLogicException("Já existe uma sessão cadastrada para a pauta informada. Não podem existir duas sessões para a mesma pauta.");
         });
 
     }
@@ -192,15 +192,16 @@ public class SessaoVotacaoService {
      * retornará dados casa a sessão esteja aberta ou encerrada. </b></p>
      *
      * @param pautaId o ID da pauta em votação.
-     * @throws BusinessLogicException Caso a sessão ainda não esteja aberta.
+     * @throws BusinessLogicException Caso a sessão ainda não esteja aberta ou a sessão ainda não esteja encerrada.
      */
     public SessaoVotacao getResultado(Long pautaId) {
         var sessao = this.getByPautaIdEager(pautaId);
 
         if (sessao.getDataAbertura() == null) {
             throw new BusinessLogicException("Sessão ainda não foi aberta para votação.");
+        } else if (OffsetDateTime.now().isBefore(sessao.getDataEncerramento())) {
+            throw new BusinessLogicException("Sessão ainda não foi encerrada. Aguarde o encerramento para poder obter o resultado.");
         }
-
         return sessao;
     }
 }
