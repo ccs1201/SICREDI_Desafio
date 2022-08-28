@@ -20,9 +20,10 @@ public class EleitorService {
      * <p>Verifica se o Eleitor existe pelo CPF e se esta apto a votar.</p>
      * <p> @see <a href="https://user-info.herokuapp.com/users/">URL_EXTERNA</a></p>
      *
-     * @param cpf
+     * @param cpf cpf do cooperado.
      * @return {@link Eleitor}
-     * @throws BusinessLogicException Caso o cpf não exista ou o Eleitor não possa votar.
+     * @throws BusinessLogicException Caso o cpf não exista.
+     * @throws UnableToVoteException Caso o eleitor não possa votar.
      */
     public Eleitor getEleitor(String cpf) {
 
@@ -39,23 +40,25 @@ public class EleitorService {
     /**
      * Verifica se o Eleitor pode votar
      *
-     * @param eleitor
-     * @return true se eleitor puder votar se não false.
+     * @param eleitor um eleitor.
+     * @return true se eleitor puder votar se não lança uma exception.
+     * @throws UnableToVoteException caso o eleitor não possa votar.
      */
     public boolean isAbleToVote(Eleitor eleitor) {
 
         if (eleitor.isAbleToVote()) {
             return true;
         } else {
-            throw new BusinessLogicException("Eleitor não autorizado a votar.");
+            throw new UnableToVoteException("Eleitor não autorizado a votar.");
         }
     }
 
     /**
      * Veririca se um eleitor pode votar pelo número do CPF.
      *
-     * @param cpfEleitor
-     * @return true se puder votar, senão false.
+     * @param cpfEleitor cpf do Eleitor.
+     * @return true se puder votar, senão Lança uma exception.
+     * @throws UnableToVoteException caso o eleitor não possa votar.
      */
     public boolean isAbleToVote(String cpfEleitor) {
         Eleitor eleitor = this.getEleitor(cpfEleitor);

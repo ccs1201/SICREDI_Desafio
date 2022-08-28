@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>br.com.ccs.sicred</groupId>
-    <artifactId>sicred</artifactId>
+    <artifactId>sicredi</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>sicred</name>
     <description>sicred</description>
