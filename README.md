@@ -12,6 +12,10 @@
 * MySQL *8*
 * MAVEN
 
+### Classe EleitorService Utiliza RestTemplate para recuperar dados da api externa.
+
+### Classe Voto implementa um DomainEvent, nos métodos votarSim e VotarNao, evento este que é representado pela classe VotoRealizadoEvent e observado na classe VotoRealizadoListener. Ambas dentro do pacote domain.event e domain.event.listener respectivamente.
+
 # Como "Buildar" este projeto
 Baixe o código fonte na IDE de sua preferência e importe o projeto pelo arquivo *pom.xml* disponível na raiz do projeto.
 
