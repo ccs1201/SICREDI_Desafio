@@ -5,24 +5,15 @@ import br.com.ccs.sicredi.domain.entity.Voto;
 import br.com.ccs.sicredi.domain.exception.service.BusinessLogicException;
 import br.com.ccs.sicredi.domain.repository.VotoRepository;
 import br.com.ccs.sicredi.domain.service.externalResources.EleitorService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.OffsetDateTime;
 
 @Service
+@RequiredArgsConstructor
 public class VotoService {
-
-    public VotoService(VotoRepository repository,
-                       EleitorService eleitorService,
-                       SessaoVotacaoService sessaoVotacaoService,
-                       CooperadoService cooperadoService) {
-
-        this.repository = repository;
-        this.eleitorService = eleitorService;
-        this.sessaoVotacaoService = sessaoVotacaoService;
-        this.cooperadoService = cooperadoService;
-    }
 
     private final OffsetDateTime now = OffsetDateTime.now();
 

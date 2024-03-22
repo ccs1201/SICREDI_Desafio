@@ -1,5 +1,6 @@
 package br.com.ccs.sicredi.api.v1.controller;
 
+import br.com.ccs.sicredi.api.v1.utils.ApiConstants;
 import br.com.ccs.sicredi.api.v1.model.representation.input.SessaoVotacaoInput;
 import br.com.ccs.sicredi.api.v1.model.representation.response.SessaoVotacaoResponse;
 import br.com.ccs.sicredi.core.utils.mapper.ResultadoSessaoResponseMapper;
@@ -18,13 +19,12 @@ import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 
 @RestController
-@RequestMapping("/api/v1/sessao")
+@RequestMapping(ApiConstants.URI_V1 + "sessao")
 @AllArgsConstructor
 public class SessaoVotacaoController {
 
     private SessaoVotacaoService service;
     private SessaoVotacaoMapper mapper;
-    ResultadoSessaoResponseMapper resultadoMapper;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)

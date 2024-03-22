@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class SessaoVotacaoServiceTest {
 
     @Autowired
-    SessaoVotacaoService service;
+    private SessaoVotacaoService service;
 
     @Test
     void getByPauta() {

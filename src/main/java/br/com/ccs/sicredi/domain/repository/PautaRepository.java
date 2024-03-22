@@ -20,14 +20,13 @@ public interface PautaRepository extends JpaRepository<Pauta, Long> {
      * @param pageable
      * @return {@link Page<Pauta>} contendo o resultado da pesquisa.
      * @author Cleber Souza
-     * @version 1.0
      * @since 21/0/2022
      */
     Page<Pauta> findByTituloPautaContaining(String titulo, Pageable pageable);
 
     /**
      * <p><b>Encontra a última {@link Pauta} cadastrada no banco de dados.</b></p>
-     * <p>Irá retonar a Pauta que tiver maior ID</p>
+     * <p>Irá retornar a Pauta que tiver maior ID</p>
      *
      * @return Optional
      */

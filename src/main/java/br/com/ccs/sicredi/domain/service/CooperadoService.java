@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 public class CooperadoService {
 
-    CooperadoRepository repository;
+    private CooperadoRepository repository;
 
     public Page<Cooperado> getAll(Pageable pageable) {
         Page<Cooperado> cooperados = repository.findAll(pageable);

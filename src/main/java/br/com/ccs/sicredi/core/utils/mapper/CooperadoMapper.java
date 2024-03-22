@@ -6,7 +6,7 @@ import br.com.ccs.sicredi.domain.entity.Cooperado;
 import org.springframework.stereotype.Component;
 
 /**
- * Classe de Implmentação do {@code mapper} de un {@link Cooperado}
+ * Classe de Implementação do {@code mapper} de un {@link Cooperado}
  */
 @Component
 public class CooperadoMapper extends AbstractMapper<CooperadoResponse, CooperadoInput, Cooperado> {

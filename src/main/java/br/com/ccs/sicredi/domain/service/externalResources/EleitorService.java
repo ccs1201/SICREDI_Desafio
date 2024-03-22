@@ -54,14 +54,14 @@ public class EleitorService {
     }
 
     /**
-     * Veririca se um eleitor pode votar pelo número do CPF.
+     * Verifica se um eleitor pode votar pelo número do CPF.
      *
      * @param cpfEleitor cpf do Eleitor.
      * @return true se puder votar, senão Lança uma exception.
      * @throws UnableToVoteException caso o eleitor não possa votar.
      */
     public boolean isAbleToVote(String cpfEleitor) {
-        Eleitor eleitor = this.getEleitor(cpfEleitor);
+        var eleitor = this.getEleitor(cpfEleitor);
 
         if (eleitor.isAbleToVote()) {
             return true;

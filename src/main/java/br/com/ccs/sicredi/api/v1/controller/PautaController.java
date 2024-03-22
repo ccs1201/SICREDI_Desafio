@@ -1,5 +1,6 @@
 package br.com.ccs.sicredi.api.v1.controller;
 
+import br.com.ccs.sicredi.api.v1.utils.ApiConstants;
 import br.com.ccs.sicredi.domain.entity.Pauta;
 import br.com.ccs.sicredi.domain.service.PautaService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -18,7 +19,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 
 @RestController
-@RequestMapping("/api/v1/pauta")
+@RequestMapping(ApiConstants.URI_V1 + "pauta")
 @AllArgsConstructor
 public class PautaController {
 

@@ -152,7 +152,7 @@ public class SessaoVotacaoService {
 
         SessaoVotacao sessaoVotacao = this.getById(sessaoId);
 
-        //Se a sessão já estiver encerrada não pose ser reaberta
+        //Se a sessão já estiver encerrada não pode ser reaberta
         OffsetDateTime dataEncerramento = sessaoVotacao.getDataEncerramento();
         if (dataEncerramento != null && dataEncerramento.isBefore(OffsetDateTime.now())) {
             throw new BusinessLogicException("Sessão já foi encerrada e não pode ser alterada.");
@@ -188,11 +188,12 @@ public class SessaoVotacaoService {
     }
 
     /**
-     * <p><b>Busca o resultado de uma sessão, somente será
-     * retornará dados casa a sessão esteja aberta ou encerrada. </b></p>
+     * <p><b>Busca o resultado de uma sessão, somente retornará dados caso a
+     * sessão esteja aberta ou encerrada. </b></p>
      *
      * @param pautaId o ID da pauta em votação.
-     * @throws BusinessLogicException Caso a sessão ainda não esteja aberta ou a sessão ainda não esteja encerrada.
+     * @throws BusinessLogicException Caso a sessão ainda não esteja aberta ou a sessão
+     * ainda não esteja encerrada.
      */
     public SessaoVotacao getResultado(Long pautaId) {
         var sessao = this.getByPautaIdEager(pautaId);

@@ -6,7 +6,7 @@ import br.com.ccs.sicredi.domain.entity.SessaoVotacao;
 import org.springframework.stereotype.Component;
 
 /**
- * <p><b>Implementacao do Mapper para exibir o resultado da votação de uma Pauta</b></p>
+ * <p><b>Implementação do Mapper para exibir o resultado da votação de uma Pauta</b></p>
  */
 @Component
 public class ResultadoSessaoResponseMapper extends AbstractMapper<ResultadoSessaoVotacaoResponse, SessaoVotacaoInput, SessaoVotacao> {

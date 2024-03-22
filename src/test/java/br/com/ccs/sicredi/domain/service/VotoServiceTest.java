@@ -15,12 +15,12 @@ class VotoServiceTest {
     @Test
     void votarSimNaPauta() {
 
-        service.votarSimNaPauta(1L, "00683761978");
+        service.votarSimNaPauta(1L, "70168535351");
 
     }
 
     @Test
     void votarNaoNaPauta() {
-        service.votarNaoNaPauta(1l, "04321768969");
+        service.votarNaoNaPauta(1L, "69126782464");
     }
 }

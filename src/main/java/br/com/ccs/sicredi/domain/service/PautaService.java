@@ -59,7 +59,7 @@ public class PautaService {
     }
 
     /**
-     * <p><b>Busca uma {@link Pauta} cuja o título conteha {@code titulo}</b></p>
+     * <p><b>Busca uma {@link Pauta} cuja o título contenha {@code titulo}</b></p>
      *
      * <p> {@code select * from pauta where titulo like %tiulo%}</p>
      *

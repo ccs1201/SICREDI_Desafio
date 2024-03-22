@@ -1,5 +1,6 @@
 package br.com.ccs.sicredi.api.v1.controller;
 
+import br.com.ccs.sicredi.api.v1.utils.ApiConstants;
 import br.com.ccs.sicredi.api.v1.model.representation.input.CooperadoInput;
 import br.com.ccs.sicredi.api.v1.model.representation.response.CooperadoResponse;
 import br.com.ccs.sicredi.core.utils.mapper.CooperadoMapper;
@@ -21,7 +22,7 @@ import org.springframework.web.client.RestTemplate;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/v1/cooperado")
+@RequestMapping(ApiConstants.URI_V1 + "cooperado")
 @AllArgsConstructor
 public class CooperadoController {
 
